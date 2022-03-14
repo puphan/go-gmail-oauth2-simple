@@ -88,7 +88,8 @@ func SendEmailOAUTH2(to string, data interface{}, template string) (bool, error)
 	displayName := "ECO SYSTEM"
 	fromMail := fmt.Sprintf("From: %s <%s> \r\n", displayName, email)
 	emailTo := "To: " + to + "\r\n"
-	subject := "Subject: " + "Test 123 Email form Gmail API using OAuth2" + "\n"
+	subjectText := "Test 123 Email form Gmail API using OAuth2 (utf-8 ทดสอบ)"
+	subject := fmt.Sprintf("Subject: =?utf-8?B?%s?=\n", base64.StdEncoding.EncodeToString([]byte(subjectText)))
 	mime := "MIME-version: 1.0;\nContent-Type: text/html; charset=\"UTF-8\";\n\n"
 	msg := []byte(fromMail + emailTo + subject + mime + "\n" + emailBody)
 
